@@ -1,19 +1,16 @@
 
 # Stage 1: Compilazione (Builder)
 
-FROM node:20-alpine AS builder
+FROM node AS builder
 
 WORKDIR /app
 
-# Copia e installa le dipendenze
-COPY package*.json ./
-RUN npm install
-
 # Copia il sorgente ed esegue la build di produzione
-COPY . .
+RUN git clone https://github.com/Riccardo-vi/SomeBankingFrontend.git .
+RUN npm install 
 RUN npm run build -- --configuration production
-# Stage 2: Runtime di Produzione (Nginx)
 
+# Stage 2: Runtime di Produzione (Nginx)
 FROM nginx:alpine
 
 # Pulizia dei file di default di Nginx

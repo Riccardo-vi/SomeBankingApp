@@ -4,12 +4,11 @@ FROM python:3.10-slim
 # Directory di lavoro nel container 
 WORKDIR /app 
 
-# Copia e installazione delle dipendenze 
-COPY requirements.txt . 
-RUN pip install -r requirements.txt 
 
 # Copia di tutto il codice sorgente del backend 
-COPY . . 
+RUN apt-get update && apt-get install -y git
+RUN git clone https://github.com/Riccardo-vi/SomeBankingFrontend.git .
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Esposizione della porta 8000 (porta di default per FastAPI) 
 EXPOSE 8000 
