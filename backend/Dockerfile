@@ -7,8 +7,11 @@ WORKDIR /app
 
 # Copia di tutto il codice sorgente del backend 
 RUN apt-get update && apt-get install -y git
-RUN git clone https://github.com/Riccardo-vi/SomeBankingFrontend.git .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN git clone https://github.com/Riccardo-vi/SomeBankingApp.git .
+
+WORKDIR /app/backend
+
+RUN pip install -r requirements.txt
 
 # Esposizione della porta 8000 (porta di default per FastAPI) 
 EXPOSE 8000 
